@@ -1,0 +1,61 @@
+name: Continuous Integration Docs
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'docs/**'
+      - 'build.sbt'
+      - 'project/**'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'build.sbt'
+      - 'project/**'
+
+jobs:
+  review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Coursier Cache
+        uses: coursier/cache-action@v5
+      - name: Setup Scala
+        uses: olafurpg/setup-scala@v10
+        with:
+          java-version: adopt@1.11
+      - name: Review
+        run: sbt "project docs" clean scalafmtCheck scalafmtSbtCheck paradox paradoxValidateLinks
+
+  publish:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+    env:
+      BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+      BINTRAY_PASS: ${{ secrets.BINTRAY_PASS }}
+      BUILD_BOT_SSH_PRIVATE_KEY: ${{ secrets.BUILD_BOT_SSH_PRIVATE_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Coursier Cache
+        uses: coursier/cache-action@v5
+      - name: Setup Scala
+        uses: olafurpg/setup-scala@v10
+        with:
+          java-version: adopt@1.11
+      - name: Publish Site
+        run: |
+          git config --global user.email "noreply@epfl.ch"
+          git config --global user.name "BBP Nexus Build Bot"
+          mkdir "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+          echo "$BUILD_BOT_SSH_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
+          chmod 400 "$HOME/.ssh/id_rsa"
+          ssh-keyscan -t rsa github.com >> "$HOME/.ssh/known_hosts"
+          sbt "project docs" clean makeSite ghpagesPushSite

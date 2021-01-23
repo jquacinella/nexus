@@ -1,0 +1,12 @@
+{
+  "@type": [
+    "CrossProject"
+  ],
+  "resourceTypes": ["https://bluebrain.github.io/nexus/vocabulary/Schema"],
+  "projects": [
+    "org/project1",
+    "org/project2"
+  ],
+  "useCurrentCaller": true,
+  "priority": 42
+}

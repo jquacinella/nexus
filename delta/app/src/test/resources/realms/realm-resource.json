@@ -1,0 +1,20 @@
+{
+  "@context": [
+    "https://bluebrain.github.io/nexus/contexts/realms.json",
+    "https://bluebrain.github.io/nexus/contexts/metadata.json"
+  ],
+  "name": "{{name}}",
+  "openIdConfig": "{{openIdConfig}}",
+  "logo": "{{logo}}",
+  "_label": "{{label}}",
+  "_grantTypes": [
+    "authorizationCode",
+    "implicit"
+  ],
+  "_issuer": "{{issuer}}",
+  "_authorizationEndpoint": "{{authorizationEndpoint}}",
+  "_tokenEndpoint": "{{tokenEndpoint}}",
+  "_userInfoEndpoint": "{{userInfoEndpoint}}",
+  "_revocationEndpoint": "{{revocationEndpoint}}",
+  "_endSessionEndpoint": "{{endSessionEndpoint}}"
+}

@@ -1,0 +1,38 @@
+{
+  "@id": "http://example.com/id",
+  "@context": [
+    {
+      "nxv" : "https://bluebrain.github.io/nexus/vocabulary/"
+    },
+    "https://bluebrain.github.io/nexus/contexts/metadata.json",
+    "https://bluebrain.github.io/nexus/contexts/resolvers.json"
+  ],
+  "@type": [
+    "Resolver",
+    "CrossProject"
+  ],
+  "resourceTypes": [
+    "nxv:Schema"
+  ],
+  "projects": [
+    "{{project}}"
+  ],
+  "identities": [
+    {
+      "@id": "{{deltaUri}}/realms/{{realm}}/users/{{user}}",
+      "@type": "User",
+      "realm": "{{realm}}",
+      "subject": "{{user}}"
+    }
+  ],
+  "priority": 20,
+  "_incoming": "{{resources}}/example-id/incoming",
+  "_outgoing": "{{resources}}/example-id/outgoing",
+  "_self": "{{resources}}/example-id",
+  "_constrainedBy": "https://bluebrain.github.io/nexus/schemas/resolvers.json",
+  "_project": "{{project-parent}}",
+  "_createdBy": "{{deltaUri}}/realms/{{realm}}/users/{{user}}",
+  "_updatedBy": "{{deltaUri}}/realms/{{realm}}/users/{{user}}",
+  "_rev": 2,
+  "_deprecated": false
+}

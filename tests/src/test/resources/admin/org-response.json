@@ -1,0 +1,12 @@
+{
+  "@context" : "https://bluebrain.github.io/nexus/contexts/metadata.json",
+  "@id" : "{{deltaUri}}/{{path}}/{{orgId}}",
+  "_self" : "{{deltaUri}}/{{path}}/{{orgId}}",
+  "_label": "{{orgId}}",
+  "@type" : "{{type}}",
+  "_rev" : {{rev}},
+  "_deprecated" : {{deprecated}},
+  "_createdBy": "{{deltaUri}}/realms/{{realm}}/users/{{user}}",
+  "_updatedBy": "{{deltaUri}}/realms/{{realm}}/users/{{user}}",
+  "_constrainedBy" : "https://bluebrain.github.io/nexus/schemas/{{schema}}.json"
+}
